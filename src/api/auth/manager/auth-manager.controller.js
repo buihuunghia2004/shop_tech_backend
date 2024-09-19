@@ -10,7 +10,7 @@ class AuthManagerController {
 
   managerLogin = async (req, res, next) => {
     const login = await authManagerService.loginManager(req.body)
-    new CREATED('manager login successfully', login).send(res)
+    new OK('manager login successfully', login).send(res)
   }
 }
 
