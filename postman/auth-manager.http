@@ -1,0 +1,8 @@
+@url_dev=http://localhost:3303/v1/api
+
+//login
+POST {{url_dev}}/auth/manager/login
+{
+  "username":"admin",
+  "password":"123456"
+}

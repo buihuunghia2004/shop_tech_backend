@@ -1,0 +1,40 @@
+{
+  "name": "shop_tech_backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "npm run migrate && node --watch server.js",
+    "migrate": "npx migrate-mongo up"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "compression": "^1.7.4",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "http-status-codes": "^2.3.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "migrate-mongo": "^11.0.0",
+    "module-alias": "^2.2.3",
+    "mongoose": "^8.6.2"
+  },
+  "_moduleAliases": {
+    "@": "./src",
+    "@config": "src/config",
+    "@helpers": "src/helpers",
+    "@middlewares": "src/middlewares",
+    "@utils": "src/utils"
+  },
+  "devDependencies": {
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0"
+  }
+}
