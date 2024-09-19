@@ -1,6 +1,7 @@
 const Joi = require('joi')
 const {
-  STRING,
+  STRING,ROLES,
+  EMAIL,
 } = require('@utils/joi-constant')
 const { validate } = require('./manager.err')
 
@@ -12,10 +13,11 @@ const { validate } = require('./manager.err')
  * _destroy
  */
 
-const registerSchema = Joi.object({
+const createSchema = Joi.object({
   username: STRING.required().messages(validate.username),
-  email: STRING.required().messages(validate.email),
-  password: STRING.required().messages(validate.password),
+  email: EMAIL.required().messages(validate.email),
+  password: STRING.required().min(6).max(30).messages(validate.password),
+  roles: ROLES.required().messages(validate.roles),
 })
 
 const loginSchema = Joi.object({
@@ -24,6 +26,6 @@ const loginSchema = Joi.object({
 })
 
 module.exports = {
-  registerSchema,
+  createSchema,
   loginSchema,
 }

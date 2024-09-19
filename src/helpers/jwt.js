@@ -1,20 +1,21 @@
 const jwt = require('jsonwebtoken')
 
-let generateToken = (user, publicKey,tokenLife) => {
-  console.log(publicKey);
-  
-    
+let generateToken = (user, privateKey,tokenLife) => {    
   return new Promise((resolve, reject) => {
     // Định nghĩa những thông tin của user mà bạn muốn lưu vào token ở đây
+    console.log(user);
+    
     const userData = {
       _id: user._id,
       email: user.email,
-      roles:user.roles
+      roles: user.roles
     }
+    console.log(userData);
+    
     // Thực hiện ký và tạo token
     jwt.sign(
       {data: userData},
-      publicKey,
+      privateKey,
       {
         algorithm: "RS256",
         expiresIn: tokenLife,
@@ -28,9 +29,9 @@ let generateToken = (user, publicKey,tokenLife) => {
   });
 }
 
-let verifyToken = (token, privateKey) => {
+let verifyToken = (token, publicKey) => {
   return new Promise((resolve, reject) => {
-    jwt.verify(token, privateKey, (error, decoded) => {
+    jwt.verify(token, publicKey, (error, decoded) => {
       if (error) {
         return reject(error);
       }

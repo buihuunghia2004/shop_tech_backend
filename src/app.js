@@ -2,7 +2,6 @@ const express = require('express')
 const morgan = require('morgan')
 const helmet = require('helmet')
 const compression = require('compression')
-const { StatusCodes } = require('http-status-codes')
 const errorHandler = require('./middlewares/errorHandler')
 const app = express()
 require('module-alias/register');

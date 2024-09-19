@@ -12,6 +12,7 @@
       "@models/*": ["./src/models/*"],
       "@services/*": ["./src/services/*"],
       "@utils/*": ["./src/utils/*"],
+      "@helpers/*": ["./src/helpers/*"],
       "@dbs/*": ["./src/dbs/*"],
       "@auth/*": ["./src/auth/*"],
     },

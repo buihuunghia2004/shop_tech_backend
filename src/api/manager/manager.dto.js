@@ -6,7 +6,7 @@ const roles = 'roles'
 const _destroy = '_destroy'
 
 const managerDTO = {
-  registerDTO: [username, password, email],
+  createManagerDTO: [username, email, password, roles],
   loginDTO: [login, password],
 }
 

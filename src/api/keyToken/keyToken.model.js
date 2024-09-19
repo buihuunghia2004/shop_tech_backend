@@ -1,11 +1,8 @@
 const { Schema, model } = require('mongoose')
 
-const DOCUMENT_NAME = 'KeyTokenManager'
-const COLLECTION_NAME = 'manager_keys'
-
 var schema = new Schema(
   {
-    manager: {
+    user: {
       type: String,
       required: true,
       unique: true,
@@ -24,9 +21,8 @@ var schema = new Schema(
     },
   },
   {
-    collection: COLLECTION_NAME,
     timestamps: true,
   }
 )
 
-module.exports = model(DOCUMENT_NAME, schema)
+module.exports = model('KeyToken', schema)

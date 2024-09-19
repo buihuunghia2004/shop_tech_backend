@@ -1,8 +1,10 @@
 require('dotenv').config()
 
 const ROLE= {
-  MANAGER: process.env.APP_ROLE_MANAGER || 'MANAGER',
-  USER: process.env.APP_ROLE_STRAFF || 'USER',
+  MANAGER: process.env.APP_ROLE_MANAGER || 'MANAGER', 
+  STAFF1: process.env.APP_ROLE_STAFF1 || 'STAFF1',
+  STAFF2: process.env.APP_ROLE_STAFF1 || 'STAFF2',
+  STAFF3: process.env.APP_ROLE_STAFF1 || 'STAFF3',
   USER1: process.env.APP_ROLE_USER1 || 'USER1',
   USER2: process.env.APP_ROLE_USER2 || 'USER2',
   USER3: process.env.APP_ROLE_USER3 || 'USER3',

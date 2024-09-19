@@ -5,7 +5,7 @@ class ErrorRes extends Error {
   constructor(message, status, details) {
     super(message)
     this.status = status
-    this.details = Array.isArray(details) ? details : [details]
+    this.details = Array.isArray(details) ? details : (details ? [details] : [])
   }
 }
 
@@ -13,6 +13,18 @@ class ValidateError extends ErrorRes {
   constructor(details = []) {
     console.log(details);
     super('Validate Error',StatusCodes.BAD_REQUEST, details)
+  }
+}
+
+class UnAuthorizedError extends ErrorRes{
+  constructor() {
+    super(ReasonPhrases.UNAUTHORIZED, StatusCodes.UNAUTHORIZED)
+  }
+}
+
+class ForbidentError extends ErrorRes{
+  constructor() {
+    super(ReasonPhrases.FORBIDDEN, StatusCodes.FORBIDDEN)
   }
 }
 
@@ -28,8 +40,12 @@ class BadRequestError extends ErrorRes{
   }
 }
 
+
+
 module.exports = {
   ConflictError,
   BadRequestError,
-  ValidateError
+  ValidateError,
+  UnAuthorizedError,
+  ForbidentError
 }

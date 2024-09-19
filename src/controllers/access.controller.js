@@ -1,6 +1,11 @@
+const ManagerService = require("@/api/manager/manager.service")
+
 class AccessController {
-  signup = async (req, res, next) => {
-    next(new Error('ok'))
+  createManager = async (req, res, next) => {
+    try {
+    } catch (error) {
+      next(error)
+    }
   }
 }
 

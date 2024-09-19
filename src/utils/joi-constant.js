@@ -12,7 +12,7 @@ const PHONENUMBER = STRING.pattern(PHONENUMER_REGEX)
 const EMAIL = STRING.email()
 const URL = STRING.uri()
 
-const ROLES = Joi.array().items(Joi.string().valid(...Object.values(roles)))
+const ROLES = Joi.array().items(Joi.string().valid(...Object.keys(roles)))
 const ARRAY = (object) => {
   return Joi.array().items(object)
 }

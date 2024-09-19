@@ -12,9 +12,11 @@ const errorHandling = ((error, req, res, next) => {
     message: error.message,
     status: statusCode,
   }
-  if (error.details) {
+  if (error.details && error.details.length) {
     result.details = error.details
   }
+  console.log(result);
+  
   return res.status(statusCode).json(result)
 })
 

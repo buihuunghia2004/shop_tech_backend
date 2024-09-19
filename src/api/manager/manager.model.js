@@ -1,8 +1,6 @@
 const { Schema, model } = require('mongoose')
 const { ROLE } = require('@/utils/constant')
-
-const DOCUMENT_NAME = 'Manager'
-const COLLECTION_NAME = 'managers'
+const { ref } = require('joi')
 
 var schema = new Schema({
   username: {
@@ -20,9 +18,19 @@ var schema = new Schema({
     required: true,
   },
   roles: {
-    type: [Number],
-    enum: [ROLE.MANAGER],
+    type: [String],
+    enum: [ROLE.MANAGER,ROLE.STAFF1,ROLE.STAFF2,ROLE.STAFF3],
     default: [],
+  },
+  createdBy: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'Manager',
+  },
+  updatedBy: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'Manager',
   },
   _destroy: {
     type: Boolean,
@@ -32,4 +40,4 @@ var schema = new Schema({
   timestamps: true
 })
 
-module.exports = model(DOCUMENT_NAME, schema)
+module.exports = model('Manager', schema)

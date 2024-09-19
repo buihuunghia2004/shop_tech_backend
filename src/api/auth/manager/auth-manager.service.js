@@ -1,31 +1,18 @@
 const bcrypt = require('bcrypt')
 const {generateKeyPairSync} = require('crypto')
-const { writeFileSync } = require('fs');
 
-const { BadRequestError } = require("../../../core/error.res")
-const {handle} = require("../../manager/manager.err")
-const managerModel = require("../../manager/manager.model")
-
-const { generateToken, verifyToken } = require('../../../helpers/jwt')
+const { BadRequestError } = require("@/core/error.res")
+const {handle} = require("@api/manager/manager.err")
+const managerModel = require('@api/manager/manager.model')
+const { generateToken } = require('@helpers/jwt')
 const { JWT } = require('@/utils/constant')
-const keytokenManagerModel = require('./keytoken-manager.model')
+const keyTokenModel = require('@/api/keyToken/keyToken.model');
 
 class AuthManagerService {
-  static registerManager = async ({ username, email, password }) => {
-    //check the manager already exist by email and username
-    const isManagerExist = await managerModel.exists({ $or: [{ email }, { username }] })
-    console.log(isManagerExist);
-    if (isManagerExist) throw new BadRequestError('manager already exist', handle.emailExist)
-    //create new manager
-
-    //return manager
-    return true
-  }
-
   static loginManager = async ({ login, password }) => {
 
     //1.check the manager already exist by email or username
-    const manager = await managerModel.findOne({ $or: [{ email: login }, { username: login }] }, { password: 1, email: 1 }).lean().exec()
+    const manager = await managerModel.findOne({ $or: [{ email: login }, { username: login }] }, { password: 1, email: 1, roles: 1 }).lean().exec()
     if (!manager) throw new BadRequestError('manager not found', handle.accountNotExist)
 
     //2.check the password
@@ -50,15 +37,15 @@ class AuthManagerService {
     const refreshToken = await generateToken(manager,privateKey, JWT.JWT_REFRESH_LIFE)
 
     //5.save keys and tokens
-    const keyTokens = await keytokenManagerModel.findOne({ manager: manager._id })
+    const keyTokens = await keyTokenModel.findOne({ user: manager._id })
     if (keyTokens) {
       keyTokens.refreshTokens.push(refreshToken)
       keyTokens.privateKey = privateKey.toString()
       keyTokens.publicKey = publicKey.toString()
       await keyTokens.save()
     }else{
-      const newKeyTokens = new keytokenManagerModel({
-        manager: manager._id,
+      const newKeyTokens = new keyTokenModel({
+        user: manager._id,
         privateKey: privateKey.toString(),
         publicKey: publicKey.toString(),
         refreshTokens: [refreshToken]
@@ -67,7 +54,7 @@ class AuthManagerService {
     }
 
     //6.return
-    return { accessToken, refreshToken }
+    return { accessToken, refreshToken, _id: manager._id }
   }
 }
 
