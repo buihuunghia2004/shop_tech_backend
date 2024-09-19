@@ -1,16 +1,23 @@
-const { CREATED, OK } = require("../../../core/success.res")
-const authManagerService = require("./auth-manager.service")
+const { CREATED, OK } = require('../../../core/success.res')
+const authManagerService = require('./auth-manager.service')
 
 class AuthManagerController {
-
   managerRegister = async (req, res, next) => {
-    const registered = await authManagerService.registerManager(req.body)
-    new CREATED('manager created successfully', registered).send(res)
+    try {
+      const registered = await authManagerService.registerManager(req.body)
+      new CREATED('manager created successfully', registered).send(res)
+    } catch (error) {
+      next(error)
+    }
   }
 
   managerLogin = async (req, res, next) => {
-    const login = await authManagerService.loginManager(req.body)
-    new OK('manager login successfully', login).send(res)
+    try {
+      const login = await authManagerService.loginManager(req.body)
+      new OK('manager login successfully', login).send(res)
+    } catch (error) {
+      next(error)
+    }
   }
 }
 

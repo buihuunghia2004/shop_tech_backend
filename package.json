@@ -31,7 +31,8 @@
     "@config": "src/config",
     "@helpers": "src/helpers",
     "@middlewares": "src/middlewares",
-    "@utils": "src/utils"
+    "@utils": "./src/utils",
+    "@api": "src/api"
   },
   "devDependencies": {
     "helmet": "^7.1.0",

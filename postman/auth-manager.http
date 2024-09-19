@@ -1,8 +1,9 @@
-@url_dev=http://localhost:3303/v1/api
+@url_dev=http://localhost:3303/v1/api/
 
-//login
+### login
 POST {{url_dev}}/auth/manager/login
+Content-Type: application/json
 {
-  "username":"admin",
+  "login":"admin",
   "password":"123456"
 }

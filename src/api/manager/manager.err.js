@@ -7,6 +7,9 @@
 
 module.exports = {
   validate: {
+    login: {
+      'any.required': 'V0001-Login is required',
+    },
     username: {
       'any.required': 'V0101-username is required',
     },
@@ -27,7 +30,7 @@ module.exports = {
     },
   },
   handle: {
-    accountNotExist: 'H0001-Manager not found',
+    accountNotExist: 'H0001- username or email is wrong',
     emailExist: 'H0101-Email already exist',
     passwordNotMatch: 'H0301-Password not match',
   },

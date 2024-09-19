@@ -1,4 +1,4 @@
-const converError = (error='-') => {
+const converError = (error='-') => {  
   return {
     code: error.split('-')[0],
     message: error.split('-')[1]
