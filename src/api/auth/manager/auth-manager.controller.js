@@ -1,4 +1,4 @@
-const { CREATED } = require("../../../core/success.res")
+const { CREATED, OK } = require("../../../core/success.res")
 const authManagerService = require("./auth-manager.service")
 
 class AuthManagerController {
