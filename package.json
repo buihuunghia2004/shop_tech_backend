@@ -14,6 +14,7 @@
   "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "cloudinary": "^2.5.0",
     "compression": "^1.7.4",
     "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
@@ -25,11 +26,14 @@
     "migrate-mongo": "^11.0.0",
     "module-alias": "^2.2.3",
     "mongoose": "^8.6.2",
+    "multer": "^1.4.5-lts.1",
+    "p-limit": "^6.1.0",
+    "path": "^0.12.7",
     "slugify": "^1.6.6"
   },
   "_moduleAliases": {
     "@": "./src",
-    "@config": "src/config",
+    "@configs": "src/configs",
     "@helpers": "src/helpers",
     "@middlewares": "src/middlewares",
     "@utils": "./src/utils",
