@@ -6,13 +6,13 @@ const stringToNum = (value, defaultValue) => {
     : defaultValue
 }
 const QueryOptions = (
-  { isPagination = true, page = 1, limit = 20, sort = 'createdBy-asc',only = [] },
+  { isPagination = true, page = 1, limit = 20, sort = 'createdBy-asc',only = '' },
   DTO
 ) => {
 
   //handle sort
   let sortsQuery = {}
-  const sorts = sort.split(',')
+  const sorts = sort.split('-')
   if (sorts.length == 2 && DTO.includes(sorts[0])) {
     sortsQuery[sorts[0]] = sorts[1] === 'desc' ? -1 : 1
   } else {

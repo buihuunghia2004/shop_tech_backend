@@ -15,8 +15,6 @@ const errorHandling = ((error, req, res, next) => {
   if (error.details && error.details.length) {
     result.details = error.details
   }
-  console.log(result);
-  
   return res.status(statusCode).json(result)
 })
 
