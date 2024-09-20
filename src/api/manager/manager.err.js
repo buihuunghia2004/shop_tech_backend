@@ -28,11 +28,16 @@ module.exports = {
     },
     _destroy: {
       'any.required': 'V0501-_destroy is required',
+      'boolean.base': 'V0502-_destroy must be a boolean',
+    },
+    isActive: {
+      'any.required': 'V0601-IsActive is required',
+      'boolean.base': 'V0602-IsActive must be a boolean',
     },
   },
   handle: {
-    accountNotExist: 'H0001- username or email is wrong',
-    accountExist: 'H0002- username or email already exist',
+    accountNotExist: 'H0001- account not exist',
+    accountExist: 'H0002- account already exist',
     emailExist: 'H0101-Email already exist',
     passwordNotMatch: 'H0301-Password not match',
   },

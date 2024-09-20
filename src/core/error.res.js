@@ -36,10 +36,15 @@ class ConflictError extends ErrorRes{
 
 class BadRequestError extends ErrorRes{
   constructor(message = ReasonPhrases.CONFLICT, detail) {
-    super(message, StatusCodes.FORBIDDEN, converError(detail))
+    super(message, StatusCodes.BAD_REQUEST, converError(detail))
   }
 }
 
+class NotFoundError extends ErrorRes{
+  constructor(message = ReasonPhrases.NOT_FOUND, detail) {
+    super(message, StatusCodes.NOT_FOUND, converError(detail))
+  }
+}
 
 
 module.exports = {
@@ -47,5 +52,6 @@ module.exports = {
   BadRequestError,
   ValidateError,
   UnAuthorizedError,
-  ForbidentError
+  ForbidentError,
+  NotFoundError
 }

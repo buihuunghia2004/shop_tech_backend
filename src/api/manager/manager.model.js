@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose')
 const { ROLE } = require('@/utils/constant')
-const { ref } = require('joi')
 
 var schema = new Schema({
   username: {
@@ -32,9 +31,14 @@ var schema = new Schema({
     required: true,
     ref: 'Manager',
   },
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
   _destroy: {
     type: Boolean,
     default: false,
+    select: false
   },
 },{
   timestamps: true
