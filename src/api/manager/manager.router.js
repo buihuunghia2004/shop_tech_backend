@@ -8,7 +8,7 @@ const {createSchema, updateByIdSchema} = require('@/api/manager/manager.validate
 const {requestDTO} = require('@/api/manager/manager.dto')
 const validateId = require('@/middlewares/validateId')
 
-Router.route('/managers')
+Router.route('/')
   .get(
     controller.findAll
   )
@@ -18,7 +18,7 @@ Router.route('/managers')
     controller.createManager
   )
 
-Router.route('/managers/:id')
+Router.route('/:id')
   .get(
     validateId(),
     controller.findById

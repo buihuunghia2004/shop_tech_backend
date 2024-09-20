@@ -9,7 +9,7 @@ const {createSchema, updateByIdSchema} = require('@/api/brand/brand.validate')
 const {requestDTO} = require('@/api/brand/brand.dto')
 const controller = require('@/api/brand/brand.controller')
 
-Router.route('/brands')
+Router.route('/')
   .get(
     controller.findAll
   )
@@ -19,7 +19,7 @@ Router.route('/brands')
     controller.createNew
   )
 
-Router.route('/brands/:id')
+Router.route('/:id')
   .get(
     validateId(),
     controller.findById
