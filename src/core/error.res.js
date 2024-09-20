@@ -46,8 +46,8 @@ class NotFoundError extends ErrorRes{
   }
 }
 
-
 module.exports = {
+  ErrorRes,
   ConflictError,
   BadRequestError,
   ValidateError,

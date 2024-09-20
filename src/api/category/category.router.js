@@ -1,24 +1,24 @@
 const express = require('express')
 const Router = express.Router()
-const controller = require('@/api/manager/manager.controller')
+const controller = require('@/api/category/category.controller')
 const authorizes = require('@/middlewares/authorizes')
 const { ROLE } = require('@/utils/constant')
 const validation = require('@/middlewares/validation')
-const {createSchema, updateByIdSchema} = require('@/api/manager/manager.validate')
-const {requestDTO} = require('@/api/manager/manager.dto')
+const {createSchema, updateByIdSchema} = require('@/api/category/category.validate')
+const {requestDTO} = require('@/api/category/category.dto')
 const validateId = require('@/middlewares/validateId')
 
-Router.route('/managers')
+Router.route('/categories')
   .get(
     controller.findAll
   )
   .post(
     authorizes([ROLE.MANAGER]),
     validation(createSchema,requestDTO.create),
-    controller.createManager
+    controller.createNew
   )
 
-Router.route('/managers/:id')
+Router.route('/categories/:id')
   .get(
     validateId(),
     controller.findById
@@ -32,7 +32,7 @@ Router.route('/managers/:id')
   .delete(
     validateId(),
     authorizes([ROLE.MANAGER]),
-    controller.deleteManagerById
+    controller.deleteById
   )
 
 module.exports = Router

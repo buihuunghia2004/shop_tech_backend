@@ -27,6 +27,10 @@ class CREATED extends SuccessResponse {
 class OFFSET_PAGINATE extends SuccessResponse {
   constructor(message, data) {
     const {limit, skip, totalRecord} = data[1]
+    if (!totalRecord) {
+      super({message, statusCode: StatusCodes.NOT_FOUND, reasonStatusCode: ReasonPhrases.NOT_FOUND, data:{data:[]}})
+      return
+    }
     const currentPage = skip / limit + 1
     const totalPage = Math.ceil(totalRecord / limit)
     const result = {
@@ -40,7 +44,7 @@ class OFFSET_PAGINATE extends SuccessResponse {
         nextPage: currentPage == totalPage ? totalPage : currentPage + 1
       }
     }    
-    super({message, statusCode: StatusCodes.CREATED, reasonStatusCode: ReasonPhrases.CREATED, data: result})
+    super({message, statusCode: StatusCodes.OK, reasonStatusCode: ReasonPhrases.OK, data: result})
   }
 }
 
