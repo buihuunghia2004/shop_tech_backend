@@ -19,10 +19,6 @@ const schema = new Schema({
         type:String,
         required:true,
     },
-    brands:{
-        type:[Schema.Types.ObjectId],
-        ref: 'Brand',
-    },
     _destroy:{
         type:Boolean,
         select: false
