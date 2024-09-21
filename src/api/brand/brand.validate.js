@@ -2,12 +2,14 @@ const Joi = require('joi')
 const {
   STRING,
   BOOLEAN,
-  URL
+  URL,
+  OBJECT_ID
 } = require('@utils/joi-constant')
 const { validate } = require('./brand.error')
 
 const createSchema = Joi.object({
   name: STRING.required().messages(validate.name),
+  categoryId: STRING.required().messages(validate.categoryId),
   imgUrl: URL.required().messages(validate.imgUrl),
   imgPId: STRING.required().messages(validate.imgPId),
 })

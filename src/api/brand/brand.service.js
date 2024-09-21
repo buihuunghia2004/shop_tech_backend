@@ -3,11 +3,14 @@ const {handle} = require("./brand.error")
 const { ObjectId } = require('mongodb');
 const brandModel = require('./brand.model');
 const { default: slugify } = require("slugify");
+const categoryModel = require("../category/category.model");
+const { omitData } = require("@/utils");
 
-const findAll = async (options) => {
+const findAll = async (options,filter = {}) => {
+  console.log(filter);
   const {isPagination, skip, limit, sorts, only} = options
   
-  const query = brandModel.find()
+  const query = brandModel.find(filter)
     .sort(sorts)
     .select(only)
 
@@ -25,9 +28,13 @@ const findById  = async (id) => {
     if (!brand) throw new NotFoundError('brand not found', handle.brandNotFound)
     return brand
 }
-const createNew = async ({ name, imgUrl, imgPId },creator) => {  
+const createNew = async ({ name, imgUrl, imgPId, categoryId},creator) => {  
   const isBrandExists = await brandModel.exists({name})
   if (isBrandExists) throw new BadRequestError('brand already exist', handle.brandIsExist)
+
+  //check category is Exists
+  const category = await categoryModel.findById(categoryId,{}).lean()
+  if (!category) throw new NotFoundError('category not found', handle.categoryNotFound)
 
   const slug = slugify(name, { lower: true, locale: 'vi', strict: true })
   const brand = await brandModel.create({
@@ -36,10 +43,11 @@ const createNew = async ({ name, imgUrl, imgPId },creator) => {
     imgPId,
     createdBy: new ObjectId(creator),
     updatedBy: new ObjectId(creator),
+    category: category._id,
     slug
   })
   
-  return brand._doc
+  return omitData(brand._doc,['__v'])
 }
 
 const deleteById = async (id) => {

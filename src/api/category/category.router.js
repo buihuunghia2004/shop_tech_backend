@@ -35,4 +35,9 @@ Router.route('/:id')
     controller.deleteById
   )
 
+Router.route('/:slug/brands')
+  .get(
+    controller.findBrands
+  )
+
 module.exports = Router
