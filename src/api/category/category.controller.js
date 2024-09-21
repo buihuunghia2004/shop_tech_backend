@@ -32,6 +32,16 @@ const findBrands = async (req, res, next) => {
   }
 }
 
+const findFilterTypes = async (req, res, next) => {
+  try {
+    const options = QueryOptions(req.query,requestDTO.only)
+    const brands = await categoryService.findFilterTypes(req.params.slug,options)
+    new OFFSET_PAGINATE('brands found successfully', brands).send(res)
+  }catch(error){
+    next(error)
+  }
+}
+
 const createNew = async (req, res, next) => {
   try {
     const created = await categoryService.createNew(req.body,req.user._id);
@@ -65,5 +75,6 @@ module.exports = {
   updateById,
   findById,
   findAll,
-  findBrands
+  findBrands,
+  findFilterTypes
 }

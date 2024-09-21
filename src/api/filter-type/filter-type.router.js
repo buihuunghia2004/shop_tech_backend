@@ -1,11 +1,11 @@
 const express = require('express')
 const Router = express.Router()
-const controller = require('@/api/category/category.controller')
+const controller = require('@/api/filter-type/filter-type.controller')
 const authorizes = require('@/middlewares/authorizes')
 const { ROLE } = require('@/utils/constant')
 const validation = require('@/middlewares/validation')
-const {createSchema, updateByIdSchema} = require('@/api/category/category.validate')
-const {requestDTO} = require('@/api/category/category.dto')
+const {createSchema, updateByIdSchema} = require('@/api/filter-type/filter-type.validate')
+const {requestDTO} = require('@/api/filter-type/filter-type.dto')
 const validateId = require('@/middlewares/validateId')
 
 Router.route('/')
@@ -34,15 +34,9 @@ Router.route('/:id')
     authorizes([ROLE.MANAGER]),
     controller.deleteById
   )
-
-Router.route('/:slug/brands')
+Router.route('/:id/filters')
   .get(
-    controller.findBrands
+    validateId(),
+    controller.findFilters
   )
-
-Router.route('/:slug/filter-types')
-  .get(
-    controller.findFilterTypes
-  )
-
 module.exports = Router

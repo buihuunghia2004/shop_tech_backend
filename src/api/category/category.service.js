@@ -3,6 +3,7 @@ const {handle} = require("./category.error")
 const { ObjectId } = require('mongodb');
 const categoryModel = require('./category.model');
 const brandService = require("@api/brand/brand.service")
+const filterTypeService = require("@api/filter-type/filter-type.service")
 const { default: slugify } = require("slugify");
 
 const findAll = async (options) => {
@@ -33,14 +34,19 @@ const findBrands = async (slug, options) => {
   const brands = await brandService.findAll(options, {category: category._id})
   return brands
 }
+
+const findFilterTypes = async (slug, options) => {
+  const category = await categoryModel.findOne({slug}).lean()
+  if (!category) throw new NotFoundError('category not found', handle.categoryNotFound)
+  const filterTypes = await filterTypeService.findAll(options, {category: category._id})
+  return filterTypes
+}
+
 const createNew = async ({ name },creator) => {  
-  //1.check category name already exist
   const isCategoryExist = await categoryModel.exists({name})
   if (isCategoryExist) throw new BadRequestError('manager already exist', handle.categoryIsExist)
 
-  //2.1.slugify
   const slug = slugify(name, { lower: true, locale: 'vi', strict: true })
-  //2.2.create new category
   const category = await categoryModel.create({
     name,
     createdBy: new ObjectId(creator),
@@ -48,7 +54,6 @@ const createNew = async ({ name },creator) => {
     slug
   })
   
-  //3.return category
   return category._doc
 }
 
@@ -75,5 +80,6 @@ module.exports = {
   updateById,
   findById,
   findAll,
-  findBrands
+  findBrands,
+  findFilterTypes
 }
