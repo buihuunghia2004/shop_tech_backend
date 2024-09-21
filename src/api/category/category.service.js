@@ -2,6 +2,7 @@ const { BadRequestError, NotFoundError } = require("@/core/error.res")
 const {handle} = require("./category.error")
 const { ObjectId } = require('mongodb');
 const categoryModel = require('./category.model');
+const brandService = require("@api/brand/brand.service")
 const { default: slugify } = require("slugify");
 
 const findAll = async (options) => {
@@ -24,6 +25,13 @@ const findById  = async (id) => {
     const category = await categoryModel.findById(id).lean()
     if (!category) throw new NotFoundError('category not found', handle.categoryNotFound)
     return category
+}
+const findBrands = async (slug, options) => {
+  const category = await categoryModel.findOne({slug}).lean()
+  if (!category) throw new NotFoundError('category not found', handle.categoryNotFound)
+    
+  const brands = await brandService.findAll(options, {category: category._id})
+  return brands
 }
 const createNew = async ({ name },creator) => {  
   //1.check category name already exist
@@ -66,5 +74,6 @@ module.exports = {
   deleteById,
   updateById,
   findById,
-  findAll
+  findAll,
+  findBrands
 }

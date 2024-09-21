@@ -1,16 +1,14 @@
+const { UnAuthorizedError } = require('@/core/error.res');
 const jwt = require('jsonwebtoken')
 
 let generateToken = (user, privateKey,tokenLife) => {    
   return new Promise((resolve, reject) => {
-    // Định nghĩa những thông tin của user mà bạn muốn lưu vào token ở đây
-    console.log(user);
-    
+    // Định nghĩa những thông tin của user mà bạn muốn lưu vào token ở đây    
     const userData = {
       _id: user._id,
       email: user.email,
       roles: user.roles
     }
-    console.log(userData);
     
     // Thực hiện ký và tạo token
     jwt.sign(
@@ -29,16 +27,14 @@ let generateToken = (user, privateKey,tokenLife) => {
   });
 }
 
-let verifyToken = (token, publicKey) => {
-  return new Promise((resolve, reject) => {
-    jwt.verify(token, publicKey, (error, decoded) => {
-      if (error) {
-        return reject(error);
-      }
-      resolve(decoded);
-    })
-  })
-}
+let verifyToken = async (token, publicKey) => {
+  try {
+    const decoded = await jwt.verify(token, publicKey, { algorithms: ['RS256'] });    
+    return decoded;
+  } catch (error) {
+    throw new Error('A005-AccessTokenNotValid');
+  }
+};
 
 module.exports = {
   generateToken,

@@ -10,6 +10,6 @@ const router = express.Router()
 //   // validation(loginSchema,loginDTO),
 //   managerRegister
 // )
-router.post('/auth/manager/login', validation(loginSchema,loginDTO),managerLogin)
+router.post('/manager/login', validation(loginSchema,loginDTO),managerLogin)
 
 module.exports = router

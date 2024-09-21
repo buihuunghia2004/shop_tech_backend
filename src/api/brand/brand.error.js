@@ -20,10 +20,15 @@ module.exports = {
     _destroy: {
       'any.required': 'V0501-_destroy is required',
       'boolean.base': 'V0502-_destroy must be a boolean',
+    },
+    categoryId: {
+      'any.required': 'V0601-Category is required',
+      'string.base': 'V0601-Invalid must be a string',
     }
   },
   handle: {
    brandNotFound: 'H0001-brand not found',
    brandIsExist: 'H0002-brand name already exist',
+   categoryNotFound: 'H0003-category not found',
   },
 }

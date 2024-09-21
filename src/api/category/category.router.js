@@ -8,7 +8,7 @@ const {createSchema, updateByIdSchema} = require('@/api/category/category.valida
 const {requestDTO} = require('@/api/category/category.dto')
 const validateId = require('@/middlewares/validateId')
 
-Router.route('/categories')
+Router.route('/')
   .get(
     controller.findAll
   )
@@ -18,7 +18,7 @@ Router.route('/categories')
     controller.createNew
   )
 
-Router.route('/categories/:id')
+Router.route('/:id')
   .get(
     validateId(),
     controller.findById
@@ -33,6 +33,11 @@ Router.route('/categories/:id')
     validateId(),
     authorizes([ROLE.MANAGER]),
     controller.deleteById
+  )
+
+Router.route('/:slug/brands')
+  .get(
+    controller.findBrands
   )
 
 module.exports = Router
