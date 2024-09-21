@@ -17,8 +17,8 @@ class ValidateError extends ErrorRes {
 }
 
 class UnAuthorizedError extends ErrorRes{
-  constructor() {
-    super(ReasonPhrases.UNAUTHORIZED, StatusCodes.UNAUTHORIZED)
+  constructor( detail) {
+    super(ReasonPhrases.UNAUTHORIZED, StatusCodes.UNAUTHORIZED, converError(detail))
   }
 }
 
