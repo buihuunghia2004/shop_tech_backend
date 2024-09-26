@@ -1,6 +1,6 @@
+require('dotenv').config();
 const { default: mongoose } = require('mongoose')
-const { db: {host, port, name} } = require('../configs/config.db')
-const connectString = `mongodb://${host}:${port}/${name}`
+const { db: {url, name, options} } = require('../configs/environment')
 
 class Database {
   constructor() {
@@ -12,7 +12,7 @@ class Database {
       mongoose.set('debug', { color: true })
     }
     mongoose
-      .connect(connectString)
+      .connect(url+name+options)
       .then(() => {
         console.log('MongoDB connected')
       })

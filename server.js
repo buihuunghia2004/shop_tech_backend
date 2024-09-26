@@ -1,5 +1,5 @@
 const app = require('./src/app')
-const {app : {port}} = require('./src/configs/config.db')
+const {app : {port}} = require('./src/configs/environment')
 
 const server = app.listen(port, () => {
   console.log(`Server on port ${port}`)

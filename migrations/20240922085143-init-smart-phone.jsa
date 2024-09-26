@@ -1,0 +1,58 @@
+module.exports = {
+  async up(db, client) {
+    //smart phone
+    const smartPhone = require('./data/smart-phone.data')
+    const category = await db.collection('categories').insertOne(smartPhone.category)
+    const filterTypes = smartPhone.filters.map(filterType => {
+      return {
+        name: filterType.name,
+        category: category.insertedId,
+        createdBy: 'admin',
+        updatedBy: 'admin',
+        _destroy: false
+      }
+    })
+
+    //filters
+    await db.collection('filterTypes').insertMany(filterTypes)
+    const filters = smartPhone.filters.map((filter, index) => {
+      return filter.options.map(option => {
+        return {
+          name: option.name,
+          code: option.code,
+          filterType: filterTypes[index]._id
+        }
+      })
+    })    
+    await db.collection('filters').insertMany(filters.flat(2))
+
+    //specs
+    const specTypes = smartPhone.specs.map(specType => {
+      return {
+        name: specType.name,
+        category: category.insertedId,
+        createdBy: 'admin',
+        updatedBy: 'admin',
+        _destroy: false
+      }
+    })
+    await db.collection('specTypes').insertMany(specTypes)
+    const specs = smartPhone.specs.map((spec, index) => {
+      return spec.options.map(option => {
+        return {
+          name: option.name,
+          code: option.code,
+          specType: specTypes[index]._id
+        }
+      })
+    })
+    await db.collection('specs').insertMany(specs.flat(2))
+
+  },
+
+  async down(db, client) {
+    // TODO write the statements to rollback your migration (if possible)
+    // Example:
+    // await db.collection('albums').updateOne({artist: 'The Beatles'}, {$set: {blacklisted: false}});
+  }
+};

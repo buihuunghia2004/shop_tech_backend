@@ -54,7 +54,7 @@ class AuthManagerService {
     }
 
     //6.return
-    return { accessToken, refreshToken, _id: manager._id }
+    return { accessToken, refreshToken, id: manager._id }
   }
 }
 

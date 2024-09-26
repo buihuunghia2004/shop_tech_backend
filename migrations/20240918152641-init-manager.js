@@ -1,9 +1,11 @@
-const { create } = require('lodash');
+require('dotenv').config();
 const { ROLE } = require('../src/utils/constant')
 const bcrypt = require('bcrypt')
+const {db: {name}} = require('../src/configs/environment')
 
 module.exports = {
   async up(db, client) {
+    console.log(process.env.NODE_ENV);
     console.log(process.env.ADMIN_PASSWORD);
     console.log(ROLE.MANAGER);
     

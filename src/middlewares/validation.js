@@ -9,6 +9,8 @@ const validation = (schema = {}, dto = []) => {
       await schema.validateAsync(req.body, { abortEarly: false })
       next()
     } catch (error) {
+      console.log(error);
+      
       next(new ValidateError(error.details.map(detail => converError(detail.message))))
     }
   }
