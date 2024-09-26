@@ -4,6 +4,7 @@ class SuccessResponse {
   constructor({message, statusCode = StatusCodes.OK,reasonStatusCode = ReasonPhrases.OK, data = {}}) {
     this.message = !message ? reasonStatusCode : message
     this.status = statusCode
+    this.env = process.env.NODE_ENV
     Object.keys(data).map(key => this[key] = data[key])
   }
 

@@ -14,8 +14,9 @@ const createSchema = Joi.object({
 })
 
 const loginSchema = Joi.object({
-  login: STRING.required().messages(validate.login),
-  password: STRING.required().messages(validate.password),
+  login: Joi.string().required().not().empty().messages(
+    validate.login),
+  password: STRING.required().empty().messages(validate.password),
 })
 
 const updateByIdSchema = Joi.object({
