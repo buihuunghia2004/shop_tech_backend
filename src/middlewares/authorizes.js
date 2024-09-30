@@ -7,22 +7,22 @@ const HEADER = {
 }
 
 const authorizes = (roles) => {
-  return async (req, res, next) => {
+  return async (req, res, next) => {    
     //check clientId and accessToken from header
-    const clientId = req.headers[HEADER.CLIENT_ID]?.toString()
-    if (!clientId) next(new UnAuthorizedError('A001-ClientIdNotProvided'))
+    const clientId = req.headers[HEADER.CLIENT_ID]?.toString()    
+    if (!clientId) next(new UnAuthorizedError('A001-Client id not provided'))
     const token = req.headers[HEADER.AUTHORIZATION]?.toString().split(' ')[1]
     if (!token) next(new UnAuthorizedError('A002-AccessTokenNotProvided'))
 
     //find objectKey by clientId
     const objKey = await keyTokenModel.findOne({ user: clientId }).lean()
     if (!objKey) next(new UnAuthorizedError('A003-ClientIdNotValid'))
-    try {      
+    try {
       //decode and check clientId
       const decode = await jwt.verifyToken(token, objKey.privateKey)
 
       if (decode.data._id != clientId)
-        next(new UnAuthorizedError('A004-ClientIdNotValid'))
+        next(new UnAuthorizedError('A004-Client id not valid'))
 
       //check roles
       if (roles && roles.length) {

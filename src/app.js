@@ -25,9 +25,9 @@ require('./dbs/init.mongo')
 swaggerDocs(app, port)
 
 //init routes
-app.use('/',require('./routes'))
+app.use('/',require('./routes'));
 
 // handling errors
-app.use(errorHandler())
+app.use(errorHandler());
 
 module.exports  = app

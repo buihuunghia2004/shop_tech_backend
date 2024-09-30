@@ -1,4 +1,3 @@
-const {Express, request, response} = require('express')
 const swaggerJSDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 const {version} = require('../../package.json')
@@ -17,22 +16,28 @@ const options = {
           type: 'http',
           scheme: 'bearer',
           bearerFormat: 'JWT'
+        }, 
+        apiKey: {
+          type: 'apiKey',
+          name: 'x-client-id',
+          in: 'header',
         }
       }
     },
     servers: [
       {
-        url: 'http://localhost:3000'
+        url: 'http://localhost:3303'
       }
     ],
     security: [
       {
-        bearerAuth: []
+        bearerAuth: [],
+        apiKey: []
       }
     ]
   },
   // Path to the API docs
-  apis: ['./src/docs/swagger/*.js']
+  apis: ['./src/docs/swagger/*.js']     
 }
 
 const swaggerSpec = swaggerJSDoc(options)

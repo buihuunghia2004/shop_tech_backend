@@ -23,6 +23,15 @@ const findById = async (req, res, next) => {
   }
 }
 
+const findMe = async (req, res, next) => {
+  try {
+    const manager = await managerService.findById(req.user._id)
+    new OK('manager found successfully', {data:manager}).send(res)
+  }catch(error){
+    next(error)
+  }
+}
+
 const createManager = async (req, res, next) => {
   try {
     req.body.roles = convertRoles(req.body.roles)    
@@ -56,5 +65,6 @@ module.exports = {
   deleteManagerById,
   updateById,
   findById,
-  findAll
+  findAll,
+  findMe
 }
