@@ -3,7 +3,7 @@ const { BadRequestError, NotFoundError } = require("@/core/error.res")
 const {handle} = require("./manager.err")
 const managerModel = require('./manager.model')
 const { ObjectId } = require('mongodb');
-const { pickData } = require('@/utils');
+const { pickData, omitData } = require('@/utils');
 const {responseDTO} = require('./manager.dto');
 const convertRoles = require('@/utils/convertRoles');
 
@@ -32,7 +32,7 @@ const findById  = async (id) => {
     .populate({ path: 'updatedBy', select: 'username' })
     .lean()
   if (!manager) throw new NotFoundError('manager not found', handle.accountNotExist)
-  return pickData(manager,responseDTO.findById)
+  return omitData(manager, ['password','roles'])
 }
 
 const createManager = async ({ username, email, password, roles },creator) => {  

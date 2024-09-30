@@ -3,13 +3,12 @@ const { StatusCodes, ReasonPhrases } = require("http-status-codes")
 class SuccessResponse {
   constructor({message, statusCode = StatusCodes.OK,reasonStatusCode = ReasonPhrases.OK, data = {}}) {
     this.message = !message ? reasonStatusCode : message
-    this.status = statusCode
-    this.env = process.env.NODE_ENV
+    this.statusCode = statusCode
     Object.keys(data).map(key => this[key] = data[key])
   }
 
   send(res) {
-    return res.status(this.status).json(this)
+    return res.status(this.statusCode).json(this)
   }
 }
 

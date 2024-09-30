@@ -18,6 +18,12 @@ Router.route('/')
     controller.createManager
   )
 
+Router.route('/me')
+  .get(
+    authorizes([ROLE.MANAGER,ROLE.STAFF1,ROLE.STAFF2,ROLE.STAFF3]),
+    controller.findMe
+  )
+
 Router.route('/:id')
   .get(
     validateId(),
