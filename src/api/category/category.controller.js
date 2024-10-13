@@ -42,6 +42,24 @@ const findFilterTypes = async (req, res, next) => {
   }
 }
 
+const getSpecsByCateId = async (req, res, next) => {
+  try {
+    const specs = await categoryService.getSpecsByCateId(req.params.id)
+    new OK('specs found successfully', {data:specs}).send(res)
+  }catch(error){
+    next(error)
+  }
+}
+
+const getFiltersByCateId = async (req, res, next) => {
+  try {
+    const filters = await categoryService.getFiltersByCateId(req.params.id)
+    new OK('filters found successfully', {data:filters}).send(res)
+  }catch(error){
+    next(error)
+  }
+}
+
 const createNew = async (req, res, next) => {
   try {
     const created = await categoryService.createNew(req.body,req.user._id);
@@ -76,5 +94,7 @@ module.exports = {
   findById,
   findAll,
   findBrands,
-  findFilterTypes
+  findFilterTypes,
+  getSpecsByCateId,
+  getFiltersByCateId
 }

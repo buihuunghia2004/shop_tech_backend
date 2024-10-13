@@ -23,6 +23,10 @@ const schema = new Schema({
         ref: 'FilterType',
         required:true,
     },
+    _destroy:{
+        type:Boolean,
+        select: false
+    },
 },{
   timestamps: true
 });

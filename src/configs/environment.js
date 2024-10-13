@@ -5,7 +5,7 @@ const development = {
     port: process.env.DEV_APP_PORT || 3000
   },
   db:{
-    url: 'mongodb://localhost:27017/',
+    url: 'mongodb://0.0.0.0:27017/',
     name: 'shop_tech',
     options: ''
   }

@@ -2,7 +2,7 @@ const { StatusCodes } = require("http-status-codes")
 
 const unexpectedError = ((req, res, next) => {  
   const error = new Error('Not found')
-  error.statusCode = StatusCodes.NOT_FOUND
+  error.status = StatusCodes.NOT_FOUND
   next(error)
 })
 

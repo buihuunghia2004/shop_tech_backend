@@ -11,11 +11,7 @@ const schema = new Schema({
         required:true,
         unique:true,
     },
-    imgUrl:{
-        type:String,
-        required:true,
-    },
-    imgPId:{
+    image:{
         type:String,
         required:true,
     },
@@ -25,13 +21,11 @@ const schema = new Schema({
         required:true,
     },
     createdBy:{
-        type:Types.ObjectId,
-        ref: 'Manager',
+        type:String,
         required:true,
     },
     updatedBy:{
-        type:Types.ObjectId,
-        ref: 'Manager',
+        type:String,
         required:true,
     },
     _destroy:{

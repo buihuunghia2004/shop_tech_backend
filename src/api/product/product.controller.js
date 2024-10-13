@@ -2,11 +2,12 @@ const { CREATED, OK, OFFSET_PAGINATE } = require('@/core/success.res')
 const QueryOptions = require('@/utils/QueryOptions')
 const { requestDTO } = require('./product.dto')
 const ProductService = require('@/api/product/product.service')
+const ProductQuery = require('@/utils/ProductQuery')
 
 const findAll = async (req, res, next) => {
   try {
-    const options = QueryOptions(req.query,requestDTO.only)    
-    const products = await ProductService.findAll(options)    
+    const options = QueryOptions(req.query,requestDTO.only)
+    const products = await ProductService.findAll(options,ProductQuery(req.query))
     new OFFSET_PAGINATE('products found successfully', products).send(res)
   }catch(error){
     next(error)
@@ -54,5 +55,5 @@ module.exports = {
   deleteById,
   updateById,
   findById,
-  findAll,
+  findAll
 }

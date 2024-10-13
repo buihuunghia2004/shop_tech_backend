@@ -1,4 +1,3 @@
-
 module.exports = {
   validate: {
     name: {
@@ -9,13 +8,9 @@ module.exports = {
       'any.required': 'V0201-slug is required',
       'string.base': 'V0202-slug must be a string',
     },
-    imgUrl: {
-      'any.required': 'V0301-ImgUrl is required',
-      'string.base': 'V0302-ImgUrl must be a string',
-    },
-    imgPId: {
-      'any.required': 'V0401-ImgPId is required',
-      'string.base': 'V0402-ImgPId must be a string',
+    image: {
+      'any.required': 'V0301-Image is required',
+      'string.base': 'V0302-Image must be a string',
     },
     _destroy: {
       'any.required': 'V0501-_destroy is required',

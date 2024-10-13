@@ -5,14 +5,7 @@ const schema = new Schema({
         type:String,
         required:true,
     },
-    createdBy:{
-        type:String,
-        required:true,
-    },
-    updatedBy:{
-        type:String,
-        required:true,
-    },
+    filters:[{type:Schema.Types.Mixed,required:true}],
     category:{
         type:Types.ObjectId,
         ref: 'Category',

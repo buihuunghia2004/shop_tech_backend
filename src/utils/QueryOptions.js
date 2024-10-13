@@ -25,10 +25,7 @@ const QueryOptions = (
     if (DTO.includes(item)) {
       onlyRequest[item] = 1
     }
-  })  
-
-  console.log('onlyRequest', onlyRequest);
-  
+  })    
 
   return {
     isPagination: isPagination === 'false' ? false : true,

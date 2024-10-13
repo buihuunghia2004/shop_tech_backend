@@ -42,6 +42,20 @@ const findFilterTypes = async (slug, options) => {
   return filterTypes
 }
 
+const getSpecsByCateId = async (id) => {
+  const category = await categoryModel.findById(id).lean()
+  if (!category) throw new NotFoundError('category not found', handle.categoryNotFound)
+  const specs = require('../../data/spec/index')[category.name]
+  return specs
+}
+
+const getFiltersByCateId = async (id) => {
+  const category = await categoryModel.findById(id).lean()
+  if (!category) throw new NotFoundError('category not found', handle.categoryNotFound)
+  const filters = require('../../data/filter/index')[category.name]
+  return filters
+}
+
 const createNew = async ({ name },creator) => {  
   const isCategoryExist = await categoryModel.exists({name})
   if (isCategoryExist) throw new BadRequestError('manager already exist', handle.categoryIsExist)
@@ -81,5 +95,7 @@ module.exports = {
   findById,
   findAll,
   findBrands,
-  findFilterTypes
+  findFilterTypes,
+  getSpecsByCateId,
+  getFiltersByCateId
 }

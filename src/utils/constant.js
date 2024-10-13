@@ -15,7 +15,13 @@ const JWT = {
   JWT_REFRESH_LIFE: process.env.JWT_REFRESH_LIFE || '30d',
 }
 
+Attributes = {
+  colors: 'colors',
+  options: 'options'
+}
+
 module.exports = {
   ROLE,
-  JWT
+  JWT,
+  Attributes
 }

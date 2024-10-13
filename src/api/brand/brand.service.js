@@ -28,7 +28,7 @@ const findById  = async (id) => {
     if (!brand) throw new NotFoundError('brand not found', handle.brandNotFound)
     return brand
 }
-const createNew = async ({ name, imgUrl, imgPId, categoryId},creator) => {  
+const createNew = async ({ name, image, categoryId},creator) => {  
   const isBrandExists = await brandModel.exists({name})
   if (isBrandExists) throw new BadRequestError('brand already exist', handle.brandIsExist)
 
@@ -39,8 +39,7 @@ const createNew = async ({ name, imgUrl, imgPId, categoryId},creator) => {
   const slug = slugify(name, { lower: true, locale: 'vi', strict: true })
   const brand = await brandModel.create({
     name,
-    imgUrl,
-    imgPId,
+    image,
     createdBy: new ObjectId(creator),
     updatedBy: new ObjectId(creator),
     category: category._id,

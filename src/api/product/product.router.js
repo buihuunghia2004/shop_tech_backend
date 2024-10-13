@@ -24,10 +24,10 @@ Router.route('/:id')
     validateId(),
     controller.findById
   )
-  .patch(
+  .put(
     validateId(),
     authorizes([ROLE.MANAGER]),
-    validation(updateByIdSchema,requestDTO.updateById),
+    // validation(updateByIdSchema,requestDTO.updateById),
     controller.updateById
   )
   .delete(

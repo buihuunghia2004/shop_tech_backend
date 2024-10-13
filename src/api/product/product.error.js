@@ -30,5 +30,6 @@ module.exports = {
    brandNotFound: 'H0001-brand not found',
    brandIsExist: 'H0002-brand name already exist',
    categoryNotFound: 'H0003-category not found',
+   productExist: 'H0004-product already exist',
   },
 }

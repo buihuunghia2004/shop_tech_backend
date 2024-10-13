@@ -25,23 +25,27 @@ const findById  = async (id) => {
 }
 
 const createNew = async ({ name, filterTypeId },creator) => {
-  const isFilterExists = await filterModel.exists({name, filterType: new ObjectId(filterTypeId)})
-  if (isFilterExists) throw new BadRequestError('filter already exist', handle.filterIsExist)
+  const filterType = await filterModel.findById(filterTypeId)
+  if (filterType) throw new BadRequestError('filter already exist', handle.filterIsExist)
 
-
-  const category = await filterModel.create({
+  const filter = await filterModel.create({
     name,
     createdBy: new ObjectId(creator),
     updatedBy: new ObjectId(creator),
     filterType: new ObjectId(filterTypeId),
   })
+
+  filterType.filters.push(filter._id)
+  await filterType.save()
   
-  return category._doc
+  return filter._doc
 }
 
 const deleteById = async (id) => {
   const filter = await filterModel.findByIdAndDelete(id)
   if (!filter) throw new NotFoundError('filter not found', handle.filterNotFound)
+
+  
   return true
 }
 

@@ -40,9 +40,13 @@ Router.route('/:slug/brands')
     controller.findBrands
   )
 
-Router.route('/:slug/filter-types')
+Router.route('/:id/filters')
   .get(
-    controller.findFilterTypes
+    controller.getFiltersByCateId
   )
 
+Router.route('/:id/specs')  
+  .get(
+    controller.getSpecsByCateId
+  )
 module.exports = Router

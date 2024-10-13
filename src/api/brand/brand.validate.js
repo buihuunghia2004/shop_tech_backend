@@ -10,14 +10,12 @@ const { validate } = require('./brand.error')
 const createSchema = Joi.object({
   name: STRING.required().messages(validate.name),
   categoryId: STRING.required().messages(validate.categoryId),
-  imgUrl: URL.required().messages(validate.imgUrl),
-  imgPId: STRING.required().messages(validate.imgPId),
+  image: URL.required().messages(validate.image),
 })
 
 const updateByIdSchema = Joi.object({
   name: STRING.messages(validate.name),
-  imgUrl: URL.required().messages(validate.imgUrl),
-  imgPId: STRING.required().messages(validate.imgPId),
+  image: URL.required().messages(validate.image),
   _destroy: BOOLEAN.messages(validate._destroy)
 })
 

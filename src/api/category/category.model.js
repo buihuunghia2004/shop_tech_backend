@@ -27,4 +27,4 @@ const schema = new Schema({
   timestamps: true
 });
 
-module.exports = model('Category', schema);
+module.exports = model('Category', schema)
