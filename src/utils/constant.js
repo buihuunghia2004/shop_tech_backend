@@ -20,8 +20,14 @@ Attributes = {
   options: 'options'
 }
 
+const DISCOUNT_TYPE = {
+  FIXED: 'FIXED',
+  PERCENT: 'PERCENT'
+}
+
 module.exports = {
   ROLE,
   JWT,
+  DISCOUNT_TYPE,
   Attributes
 }

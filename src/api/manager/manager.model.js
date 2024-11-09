@@ -8,27 +8,27 @@ var schema = new Schema({
     unique: true,
   },
   email: {
-    type: String,
-    required: true,
+    type: String, 
+    required: true, 
     unique: true,
-  },
-  password: {
+  }, 
+  password: { 
     type: String,
     required: true,
   },
   roles: {
-    type: [String],
-    enum: [ROLE.MANAGER,ROLE.STAFF1,ROLE.STAFF2,ROLE.STAFF3],
+    type: [String], 
+    enum: [ROLE.MANAGER,ROLE.STAFF1,ROLE.STAFF2,ROLE.STAFF3],       
     default: [],
   },
   createdBy: {
-    type: Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,  
     required: true,
     ref: 'Manager',
   },
-  updatedBy: {
-    type: Schema.Types.ObjectId,
-    required: true,
+  updatedBy: {  
+    type: Schema.Types.ObjectId, 
+    required: true, 
     ref: 'Manager',
   },
   isActive: {

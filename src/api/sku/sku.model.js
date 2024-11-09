@@ -7,6 +7,7 @@ var schema = new Schema({
     price:{type:Number,required:true},
     filters:{type:[String],required:true,select: false},
     default:{type:Boolean,default:false},
+    isPublic:{type:Boolean,default:false},
     product:{type:Types.ObjectId,ref: 'Product',required:true},
     inventory:{type:Types.ObjectId,ref: 'Inventory',default:null},
     _destroy:{type:Boolean,select: false},

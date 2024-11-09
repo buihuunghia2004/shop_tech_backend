@@ -1,12 +1,9 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model, Types } = require('mongoose')
 const { USER_ROLES } = require('../../utils/constant')
-
-const DOCUMENT_NAME = 'User'
-const COLLECTION_NAME = 'users'
 
 var schema = new Schema(
   {
-    name: {
+    username: {
       type: String,
       required: true,
       unique: true,
@@ -25,12 +22,33 @@ var schema = new Schema(
       type: [String],
       enum: [USER_ROLES.USER1, USER_ROLES.USER2, USER_ROLES.USER3],
       default: [USER_ROLES.USER1],
+    },
+    isActive: {
+      type: Boolean,
+      default: false,
+    },
+    recieverInfos: {
+      type: [{
+        phoneNumber: {type: String},
+        name: {type: String},
+        address: {type: String},
+        latitude: {type: Number},
+        longitude: {type: Number},
+        isDefault: {type: Boolean},
+      }],
+      default: true,
+    },
+    cart: {
+      type: [{
+        sku: {type: Types.ObjectId, ref: 'Sku'},
+        quantity: {type: Number, default: 1},
+      }],
+      default: [],
     }
   },
   {
-    timestamps: true,
-    collation: COLLECTION_NAME,
+    timestamps: true
   }
 )
 
-module.exports = model(DOCUMENT_NAME, schema)
+module.exports = model('User', schema)

@@ -1,4 +1,4 @@
-require('./component')
+require('./component/component')
 
 /**
  * @swagger

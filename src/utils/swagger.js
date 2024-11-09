@@ -26,7 +26,7 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3303'
+        url: 'http://localhost:3303'  
       }
     ],
     security: [
@@ -37,7 +37,7 @@ const options = {
     ]
   },
   // Path to the API docs
-  apis: ['./src/docs/swagger/*.js']     
+  apis: ['./src/docs/swagger/*/*.js']     
 }
 
 const swaggerSpec = swaggerJSDoc(options)
